@@ -1,13 +1,18 @@
 package me.whiteship;
 
+import java.lang.annotation.Retention;
+
+@MyAnnotation
 public class Book {
 
     private String a;
 
+    @MyAnnotation
     private static String B = "Book";
 
     private static final String C = "Book";
 
+    @MyAnnotation
     public String d = "d";
 
     protected String e = "e";

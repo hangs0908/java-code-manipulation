@@ -54,6 +54,22 @@ public class App
             System.out.println(Modifier.isStatic(modifiers));
         });
 
+        System.out.println("--------------------");
+        Arrays.stream(bookClass.getAnnotations()).forEach(System.out::println);
+        Arrays.stream(MyBook.class.getAnnotations()).forEach(System.out::println);
+        Arrays.stream(MyBook.class.getDeclaredAnnotations()).forEach(System.out::println);
+        System.out.println("--------------------");
+        Arrays.stream(bookClass.getDeclaredFields()).forEach(f -> {
+            Arrays.stream(f.getAnnotations()).forEach(a -> {
+                if(a instanceof MyAnnotation) {
+                    MyAnnotation myAnnotation = (MyAnnotation) a;
+                    System.out.println(myAnnotation.name());
+                    System.out.println(myAnnotation.number());
+                }
+            });
+        });
+
+
 
     }
 }
