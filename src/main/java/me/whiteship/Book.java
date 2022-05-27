@@ -40,7 +40,9 @@ public class Book {
 
     public static String A = "A";
 
+    @MyAnnotation
     private String B = "B";
+
 
     private void c() {
         System.out.println("C");

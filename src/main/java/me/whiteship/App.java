@@ -94,7 +94,9 @@ public class App
         int invoke = (int) sum.invoke(book1, 1, 2);
         System.out.println(invoke);
 
-
+        /*
+            연습
+         */
 
     }
 }
