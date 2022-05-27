@@ -1,8 +1,6 @@
 package me.whiteship;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.Arrays;
 
 /**
@@ -11,7 +9,7 @@ import java.util.Arrays;
  */
 public class App 
 {
-    public static void main( String[] args ) throws ClassNotFoundException, NoSuchFieldException {
+    public static void main( String[] args ) throws ClassNotFoundException, NoSuchFieldException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
 
 //        ClassLoader classLoader = App.class.getClassLoader();
 //        System.out.println(classLoader);
@@ -68,6 +66,33 @@ public class App
                 }
             });
         });
+
+        /*
+            리플랙션 2 : 클래스 정보 수정
+         */
+        Class<?> bookClass1 = Class.forName("me.whiteship.Book");
+        Constructor<?> constructor = bookClass1.getConstructor(String.class);
+        Book book1 = (Book) constructor.newInstance("myBook");
+        System.out.println(book1);
+
+        Field f = Book.class.getDeclaredField("A");
+        System.out.println(f.get(null)); // 이 필드는 static한 필드니까 null
+        f.set(null,"AAAAA");
+        System.out.println(f.get(null));
+
+        Field b = Book.class.getDeclaredField("B");
+        b.setAccessible(true);
+        System.out.println(b.get(book1));
+        b.set(book1, "BBBB");
+        System.out.println(b.get(book1));
+
+        Method c = Book.class.getDeclaredMethod("c");
+        c.setAccessible(true);
+        c.invoke(book1);
+
+        Method sum = Book.class.getDeclaredMethod("sum", int.class, int.class);
+        int invoke = (int) sum.invoke(book1, 1, 2);
+        System.out.println(invoke);
 
 
 
